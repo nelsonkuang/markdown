@@ -1,5 +1,5 @@
 # Markdown
-Markdown简易入门教程    
+Markdown简易入门教程, 使用方式：点编辑README.md 文件就可以看到所有markdown格式。    
 # 标题一
 ## 标题二
 ### 标题三
