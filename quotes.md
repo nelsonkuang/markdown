@@ -8,3 +8,11 @@
 ---
 “I can accept failure. Everyone fails at something. But I can’t accept not trying.”  - *Michael Jordan*
 ---
+“Rules for happiness: something to do, someone to love, something to hope for.”  - *Immanuel Kant*
+---
+“Success is the ability to go from failure to failure without losing your enthusiasm.”  - *Winston Churchill*
+---
+“People who are unable to motivate themselves must be content with mediocrity no matter how impressive their other talents.” - *Andrew Carnegie*
+---
+“The secret of change is to focus all of your energy, not on fighting the old but on building the new.” - *Socrates*
+---
