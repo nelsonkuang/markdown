@@ -18,3 +18,5 @@
 ---
 “Strength does not come from winning. Your struggles develop your strengths.” - *Arnold Schwarzenegger*
 ---
+“Do what you love, not what you think you're supposed to do.” - *Unknown*
+---
