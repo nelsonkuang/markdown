@@ -20,3 +20,5 @@
 ---
 “Do what you love, not what you think you're supposed to do.” - *Unknown*
 ---
+“Although the world is full of suffering, it is also full of the overcoming of it.” - *Helen Keller*
+---
