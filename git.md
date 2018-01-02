@@ -14,6 +14,7 @@ git push origin master --force // 再推送到远程仓库
 
 ### git 一条龙操作
 ```
+git branch source
 git clone XXXXX
 git pull
 git add .
