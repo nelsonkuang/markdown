@@ -16,6 +16,7 @@ git push origin master --force // 再推送到远程仓库
 ```
 git branch -d master
 git branch source
+git branch --track gh-pages remotes/origin/gh-pages
 git push -u origin source # 客户端首次提交source分支
 git clone XXXXX
 git pull
