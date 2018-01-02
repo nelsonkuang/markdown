@@ -12,7 +12,7 @@ git reset --hard develop  // 将本地的旧分支 master 重置成 develop
 git push origin master --force // 再推送到远程仓库
 ```
 
-### git一条龙操作
+### git 一条龙操作
 ```
 git clone XXXXX
 git pull
@@ -23,7 +23,7 @@ git checkout master
 git merge gh-pages
 ```
 
-### git解决冲突
+### git 解决冲突
 ```
 git add index.html // 假如是index.html文件冲突，修改并提交单个文件
 git commit -m 解决index.html文件冲突
