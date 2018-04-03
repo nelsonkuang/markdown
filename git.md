@@ -33,3 +33,17 @@ git add index.html // 假如是index.html文件冲突，修改并提交单个文
 git commit -m 解决index.html文件冲突
 git push origin master
 ```
+
+### git 解决冲突
+```
+git init
+git add . 
+git commit -m "first commit"
+git remote add origin 你的远程库地址  // 把本地库与远程库关联
+git push -u origin master    // 第一次推送时
+git push origin master  // 第一次推送后，直接使用该命令即可推送修改
+
+// 出问题后：
+git branch --set-upstream-to=origin/<branch> master
+git pull origin master --allow-unrelated-histories
+```
