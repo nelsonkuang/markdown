@@ -34,7 +34,7 @@ git commit -m 解决index.html文件冲突
 git push origin master
 ```
 
-### git 解决冲突
+### git 本地文件提交到github上
 ```
 git init
 git add . 
