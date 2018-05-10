@@ -1,0 +1,31 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "editor.formatOnType": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "files.associations": {
+        "*.wpy": "vue"
+    },
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": false,
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true
+    },
+    "editor.tabSize": 2,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "html",
+        "vue",
+        {
+            "language": "html",
+            "autoFix": true
+        }
+    ],
+    "prettier.semi": false,
+    "prettier.singleQuote": true,
+    "explorer.confirmDelete": false,
+    "vetur.format.defaultFormatter.js": "vscode-typescript"
+}
