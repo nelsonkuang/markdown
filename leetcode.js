@@ -30,6 +30,8 @@ var findMedianSortedArrays = function(nums1, nums2) {
     return ((nums1[0] + nums1[m - 1] + nums2[0] + nums2[n - 1]) / 4).toFixed(1, 10);
 };
 // arrayFlatten
+// flatten([[1,[4,5],2],3])
+// => [1, 4, 5, 2, 3]
 function arrayFlatten(arr) {
     if(Object.prototype.toString.call(arr)!=='[object Array]'){
         return [arr];
