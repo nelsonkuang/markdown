@@ -31,11 +31,11 @@ var findMedianSortedArrays = function(nums1, nums2) {
 };
 // arrayFlatten
 function arrayFlatten(arr) {
-	if(Object.prototype.toString.call(arr)!=='[object Array]'){
-		return [arr];
-	}else if(arr.length < 1) {
-		return [];
+    if(Object.prototype.toString.call(arr)!=='[object Array]'){
+        return [arr];
+    }else if(arr.length < 1) {
+	return [];
     }else {
-	    return [].concat(arrayFlatten(arr[0]), arrayFlatten(arr.slice(1)));
+	return [].concat(arrayFlatten(arr[0]), arrayFlatten(arr.slice(1)));
     }
 }
