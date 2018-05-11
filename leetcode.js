@@ -29,3 +29,13 @@ var findMedianSortedArrays = function(nums1, nums2) {
     // other handlers
     return ((nums1[0] + nums1[m - 1] + nums2[0] + nums2[n - 1]) / 4).toFixed(1, 10);
 };
+// arrayFlatten
+function arrayFlatten(arr) {
+	if(Object.prototype.toString.call(a)!=='[object Array]'){
+		return [arr];
+	}else if(arr.length < 1) {
+		return [];
+    }else {
+	    return [].concat(arrayFlatten(arr[0]), arrayFlatten(arr.slice(1)));
+    }
+}
