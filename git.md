@@ -47,3 +47,10 @@ git push origin master  // 第一次推送后，直接使用该命令即可推�
 git branch --set-upstream-to=origin/<branch> master
 git pull origin master --allow-unrelated-histories
 ```
+
+### git 基于指定分支aaa创建分支bbb
+```
+git checkout aaa
+git pull origin aaa
+git checkout -b bbb
+```
