@@ -53,4 +53,5 @@ git pull origin master --allow-unrelated-histories
 git checkout aaa
 git pull origin aaa
 git checkout -b bbb
+git push origin bbb
 ```
