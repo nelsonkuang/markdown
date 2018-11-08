@@ -55,3 +55,35 @@ git pull origin aaa
 git checkout -b bbb
 git push origin bbb
 ```
+
+### Git 修改 commit 的作者信息
+#### 修改 git 配置
+```
+git config --global user.email "youremail@googl.com"
+git config --global user.name "your name"
+```
+#### 修复 git 历史提交信息
+警告： 这个操作会破坏你的仓库历史， 如果你和别人在协同开发这个仓库，重写已发布的历史记录是一个不好的操作。建议只在紧急情况操作   
+```
+git filter-branch --env-filter '
+
+OLD_EMAIL="your-old-email@example.com"
+CORRECT_NAME="Your Correct Name"
+CORRECT_EMAIL="your-correct-email@example.com"
+
+if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+then
+    export GIT_COMMITTER_NAME="$CORRECT_NAME"
+    export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+fi
+if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+then
+    export GIT_AUTHOR_NAME="$CORRECT_NAME"
+    export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
+fi
+' --tag-name-filter cat -- --branches --tags
+```
+#### 将修改后的仓库历史推到远程
+```
+git push --force --tags origin 'refs/heads/*'
+```
