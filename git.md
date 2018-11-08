@@ -56,7 +56,7 @@ git checkout -b bbb
 git push origin bbb
 ```
 
-### Git 修改 commit 的作者信息
+### 使用bash 修改 commit 的作者信息
 #### 修改 git 配置
 ```
 git config --global user.email "youremail@googl.com"
