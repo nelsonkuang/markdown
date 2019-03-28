@@ -237,9 +237,7 @@
                 parentNode = null,
                 nodeId = 0,
                 // specialTags = ['br', 'input']
-                root = {} // node : {type = 1'tag' | 2'text', tagName?=String, children = [], attrs = [], text?= String, nodeId=String}
-            // console.log(html)
-            // insertNodeIntoTree(tRoot, parentTNode, tagTNode)
+                root = Object.create(null) // node : {type = 1'tag' | 2'text', tagName?=String, children = [], attrs = [], text?= String, nodeId=String}
             ps.parse(html, {
                 startElement: function (sTagName, oAttrs) {
                     console.log('startElement', ++startElementCount)
@@ -310,13 +308,13 @@
                 }
             })
 
-            function insertNodeIntoTree(tRoot, parentTNode, tagTNode) {
+            function insertNodeIntoTree(tRoot, parentTNode, tNode) {
                 // console.log(tRoot)
                 if (tRoot.nodeId == parentTNode.nodeId) {
-                    tRoot.children.push(tagTNode)
+                    tRoot.children.push(tNode)
                 } else if (tRoot.children && tRoot.children.length > 0) {
                     tRoot.children.forEach((subTRoot) => {
-                        insertNodeIntoTree(subTRoot, parentTNode, tagTNode)
+                        insertNodeIntoTree(subTRoot, parentTNode, tNode)
                     })
                 }
             }
