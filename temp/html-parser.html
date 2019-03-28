@@ -131,6 +131,8 @@
 
                     // end tag
                     else if (s.substring(0, 2) == "</") {
+                        // 改造了这里，因为RegExp.leftContext,RegExp.rightContext等MDN上不建议应用于生产环境
+                        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/rightContext
                         // if (this.endTagRe.test(s)) {
                         lastMatch = s.match(this.endTagRe)
                         if (lastMatch) {
@@ -152,6 +154,8 @@
                     }
                     // start tag
                     else if (s.charAt(0) == "<") {
+                        // 改造了这里，因为RegExp.leftContext,RegExp.rightContext等MDN上不建议应用于生产环境
+                        // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/rightContext
                         lastMatch = s.match(this.startTagRe)
                         if (lastMatch) {
                             lastIndex = s.search(this.startTagRe)
@@ -199,6 +203,7 @@
             parseAttributes: function (sTagName, s) {
                 var oThis = this;
                 var attrs = [];
+                // 下面这种用法太NB，直接把replace的正则替换回调的所有参数用上
                 s.replace(this.attrRe, function (a0, a1, a2, a3, a4, a5, a6) {
                     attrs.push(oThis.parseAttribute(sTagName, a0, a1, a2, a3, a4, a5, a6));
                 });
