@@ -29,8 +29,8 @@
             <footer id="footer" style="text-align:center;font-size:12px;padding:50px 0;">
                 <div class="outer">
                     <div id="footer-info">
-                        <div class="footer-left"><a target="_blank" href="http://www.a4z.cn/pui">返回 PUI 首页</a> |<a target="_blank"
-                                href="mailto:kbl_1794@qq.com">联系我们</a><br><br> Copyright © 2015-<span
+                        <div class="footer-left"><a target="_blank" href="http://www.a4z.cn/pui">返回 PUI 首页</a> |<a
+                                target="_blank" href="mailto:kbl_1794@qq.com">联系我们</a><br><br> Copyright © 2015-<span
                                 id="year_today">201<9</span> a4z>.cn |<a href="http://www.miibeian.gov.cn/"
                                         target="_blank">粤ICP备18002963号</a></div>
                     </div>
@@ -237,7 +237,9 @@
                 parentNode = null,
                 nodeId = 0,
                 // specialTags = ['br', 'input']
-                root = Object.create(null) // node : {type = 1'tag' | 2'text', tagName?=String, children = [], attrs = [], text?= String, nodeId=String}
+                root = Object.create(
+                    null
+                    ) // node : {type = 1'tag' | 2'text', tagName?=String, children = [], attrs = [], text?= String, nodeId=String}
             ps.parse(html, {
                 startElement: function (sTagName, oAttrs) {
                     console.log('startElement', ++startElementCount)
@@ -308,15 +310,19 @@
                 }
             })
 
-            function insertNodeIntoTree(tRoot, parentTNode, tNode) {
-                // console.log(tRoot)
-                if (tRoot.nodeId == parentTNode.nodeId) {
-                    tRoot.children.push(tNode)
-                } else if (tRoot.children && tRoot.children.length > 0) {
-                    tRoot.children.forEach((subTRoot) => {
-                        insertNodeIntoTree(subTRoot, parentTNode, tNode)
-                    })
+            function insertNodeIntoTree(tRoot, parentTNode, tNode) { // 递归为每个儿子节点找爸爸，找到到添加到children数组里
+                var foundOne = false // 添加标记，优化了性能，不然就算找到了位置，其他的树叉继续去递归遍历就浪费内存
+                var dive = function (rNode, pNode, node) { // 递归查找插入的位置
+                    if (!foundOne && rNode.nodeId == pNode.nodeId) {
+                        rNode.children.push(node)
+                        foundOne = true
+                    } else if (!foundOne && rNode.children && rNode.children.length > 0) {
+                        rNode.children.forEach((subRNode) => {
+                            dive(subRNode, pNode, node)
+                        })
+                    }
                 }
+                dive(tRoot, parentTNode, tNode) // 开始
             }
             console.log(root) // => 生成一棵完整和AST树
         });
