@@ -3,43 +3,40 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Html Parser</title>
+    <title>自己动手做一下Html Parser => AST，注意：使用的是只有一个根节点的模式</title>
     <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <meta content="telephone=no" name="format-detection">
     <meta content="email=no" name="format-detection">
-    <script src="dist/js/pix2rem.min.js"></script>
-    <link href="dist/css/base_2016_11.min.css" rel="stylesheet" />
     <style>
     </style>
 </head>
 
 <body>
     <article class="pageview" style="opacity: 0;">
-        <h1>CSS3实现简单动画, demo如下：</h1>
-        <div class="container">
+        <div id="vue-template-content">
+            <input type="number" name="phone" class="text" id="loginname" placeholder="请输入手机号码" maxlength="11">
+            <!--- <div>测试comment</div> --->
+            <h1>自己动手做一下Html Parser => AST，注意：使用的是只有一个根节点的模式</h1>
             <div class="container">
-                <div class="redbox infinite rotate"></div>
-                <div class="bluebox fadeInPendingFadeOutUp"></div>
-                <div class="orangebox fadeInUp2D"></div>
-            </div>
-        </div>
-        <footer id="footer" style="text-align:center;font-size:12px;padding:50px 0;">
-            <div class="outer">
-                <div id="footer-info">
-                    <div class="footer-left">
-                        <a target="_blank" href="/pui">返回 PUI 首页</a> | <a target="_blank"
-                            href="mailto:kbl_1794@qq.com">联系我们</a>
-                        <br>
-                        <br>
-                        Copyright © 2015-<span id="year_today">201<9</span> a4z>.cn | <a
-                                    href="http://www.miibeian.gov.cn/" target="_blank">粤ICP备18002963号</a>
-                    </div>
+                <div class="container">
+                    <div class="redbox infinite rotate"></div>
+                    <div class="bluebox fadeInPendingFadeOutUp"></div>
+                    <div class="orangebox fadeInUp2D"></div>
                 </div>
             </div>
-        </footer>
-        <!--- <div>测试comment</div> --->
+            <footer id="footer" style="text-align:center;font-size:12px;padding:50px 0;">
+                <div class="outer">
+                    <div id="footer-info">
+                        <div class="footer-left"><a target="_blank" href="http://www.a4z.cn/pui">返回 PUI 首页</a> |<a target="_blank"
+                                href="mailto:kbl_1794@qq.com">联系我们</a><br><br> Copyright © 2015-<span
+                                id="year_today">201<9</span> a4z>.cn |<a href="http://www.miibeian.gov.cn/"
+                                        target="_blank">粤ICP备18002963号</a></div>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </article>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script>
@@ -240,41 +237,51 @@
                 parentNode = null,
                 nodeId = 0,
                 // specialTags = ['br', 'input']
-                root = {}; // node : {type = 1'tag' | 2'text', tagName?=String, children = [], attrs = [], text?= String, nodeId=String}
+                root = {} // node : {type = 1'tag' | 2'text', tagName?=String, children = [], attrs = [], text?= String, nodeId=String}
             // console.log(html)
+            // insertNodeIntoTree(tRoot, parentTNode, tagTNode)
             ps.parse(html, {
                 startElement: function (sTagName, oAttrs) {
                     console.log('startElement', ++startElementCount)
                     console.log(sTagName)
                     console.log(oAttrs)
-                    var tagNode = {
-                        type: 1,
-                        attrs: oAttrs,
-                        tagName: sTagName,
-                        children: [],
-                        nodeId: ++nodeId
-                    }
-                    if (sTagName != 'br') { // br等等特殊标签处理
+                    var tagNode = Object.create(null) // 用干净的object优化性能
+                    tagNode.type = 1
+                    tagNode.attrs = oAttrs
+                    tagNode.tagName = sTagName
+                    tagNode.children = []
+                    tagNode.nodeId = ++nodeId
+                    /*                     var tagNode = {
+                                            type: 1,
+                                            attrs: oAttrs,
+                                            tagName: sTagName,
+                                            children: [],
+                                            nodeId: ++nodeId
+                                        } */
+                    if (sTagName != 'br' && sTagName != 'input') { // br等等特殊标签处理
                         elementStack.push(tagNode)
                     }
                     if (startElementCount == 1) {
-                        root = Object.assign({}, tagNode)
-                        parentNode = root
+                        root = tagNode
+                        parentNode = tagNode
+                        // console.log(root, parentNode)
                     } else {
                         // 处理插入树结构
-                        // insertNodeIntoTree(root, parentNode, tagNode)
-                        parentNode = tagNode
-                        // 处理插入树结构
+                        insertNodeIntoTree(root, parentNode, tagNode)
+                        if (sTagName != 'br' && sTagName != 'input') { // br等等特殊标签处理，不能作为父节点
+                            parentNode = tagNode
+                        }
                     }
                 },
                 endElement: function (sTagName) {
                     console.log('endElement', ++endElementCount)
                     console.log(sTagName)
-                    var len = this.elementStack.length
+                    var len = elementStack.length
                     if (len > 0) {
-                        if (this.elementStack[this.elementStack.length - 1].tagName == sTagName) {
+                        if (elementStack[elementStack.length - 1].tagName == sTagName) {
                             // 处理一个标签闭合完成
-                            this.elementStack.pop()
+                            elementStack.pop()
+                            parentNode = elementStack[elementStack.length - 1]
                         } else {
                             // 出现未闭合标签，报错
                         }
@@ -283,19 +290,37 @@
                 characters: function (s) {
                     console.log('characters', ++charactersCount)
                     console.log(s)
-                    var textNode = {
-                        type: 2,
-                        text: s
-                    }
+                    var textNode = Object.create(null) // 用干净的object优化性能
+                    textNode.type = 2
+                    textNode.text = s
+                    textNode.nodeId = ++nodeId
+                    /*                     var textNode = {
+                                            type: 2,
+                                            text: s,
+                                            nodeId: ++nodeId
+                                        } */
                     // 处理插入树结构
-                    // insertNodeIntoTree(root, parentNode, textNode)
-
+                    if (parentNode && parentNode.nodeId) { // 不处理空格
+                        insertNodeIntoTree(root, parentNode, textNode)
+                    }
                 },
                 comment: function (s) {
                     console.log('comment', ++commentCount)
                     console.log(s)
                 }
             })
+
+            function insertNodeIntoTree(tRoot, parentTNode, tagTNode) {
+                // console.log(tRoot)
+                if (tRoot.nodeId == parentTNode.nodeId) {
+                    tRoot.children.push(tagTNode)
+                } else if (tRoot.children && tRoot.children.length > 0) {
+                    tRoot.children.forEach((subTRoot) => {
+                        insertNodeIntoTree(subTRoot, parentTNode, tagTNode)
+                    })
+                }
+            }
+            console.log(root) // => 生成一棵完整和AST树
         });
     </script>
 </body>
