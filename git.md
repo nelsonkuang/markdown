@@ -87,3 +87,13 @@ fi
 ```
 git push --force --tags origin 'refs/heads/*'
 ```
+### 删除分支
+#### 删除远程分支
+```
+git push origin --delete mybranch
+```
+#### 删除本地分支(-D适用于删除未合并分支)
+```
+git branch -d mybranch
+git branch -D mybranch
+```
