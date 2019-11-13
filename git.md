@@ -56,6 +56,14 @@ git checkout -b bbb
 git push origin bbb
 ```
 
+### git 基于指定分支 aaa 的某次提交(commit)创建分支 bbb
+```
+git checkout aaa
+git pull origin aaa
+git checkout -b bbb <commitId>
+git push origin bbb
+```
+
 ### 使用bash 修改 commit 的作者信息
 #### 修改 git 配置
 ```
