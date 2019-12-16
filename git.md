@@ -126,6 +126,34 @@ git clean -nf
 git clean -nfd
 ```
 
+### fork 分支与源分支同步代码
+#### 首先保证本地仓库的 upstream 是源项目的 URL，若没有则添加：
+```
+git remote add upstream URL
+```
+#### 然后利用 fetch 和 merge 合并 upstream 的 master 分支：
+```
+git fetch upstream
+git merge upstream/master
+```
+#### 首此时本地的 master 分支就更新至 upstream 的 master 版本。然后利用 push 将本地分支覆盖到 git 远程分支上：
+```
+git push origin master:master
+```
+#### git fetch 的简单用法: 更新远程代码到本地仓库
+```
+# 查看远程仓库
+git remote -v
+# origin    git@gitlab.liquidnetwork.com:zyj/saiyan.git (fetch)
+# origin    git@gitlab.liquidnetwork.com:zyj/saiyan.git (push)
+# upstream    git@gitlab.liquidnetwork.com:backend/saiyan.git (fetch)
+# upstream    git@gitlab.liquidnetwork.com:backend/saiyan.git (push)
+
+
+# 拉取远程代码到本地
+git pull upstream master
+```
+
 ### 其他
 #### git报错：Please move or remove them before you can switch branches.
 ```
