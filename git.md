@@ -154,6 +154,16 @@ git remote -v
 git pull upstream master
 ```
 
+### git 移除上一次的 commit 中误添加的文件
+转自：https://www.cnblogs.com/Sir-Lin/p/8243999.html   
+`git reset --mixed HEAD~1 `   
+这操作即取消上次的 `commit`    
+
+### git pull 失败 ,提示： fatal: refusing to merge unrelated histories 错误
+转自：https://www.centos.bz/2018/03/git-%E5%87%BA%E7%8E%B0-fatal-refusing-to-merge-unrelated-histories-%E9%94%99%E8%AF%AF/   
+`git pull origin master --allow-unrelated-histories`   
+这操作即强制把不相干的远程 git 库与本地库合起来    
+
 ### 其他
 #### git报错：Please move or remove them before you can switch branches.
 ```
