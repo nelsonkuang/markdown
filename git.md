@@ -168,6 +168,19 @@ git pull upstream master
 `git branch --set-upstream-to=origin/remote_branch  your_branch
 `
 
+### git stash 用法总结和注意点
+转自：https://www.cnblogs.com/zndxall/archive/2018/09/04/9586088.html
+```
+git stash save "save message"
+git stash list
+git stash show stash@{$num}
+git stash show  stash@{$num}  -p
+git stash apply stash@{$num} 
+git stash pop
+git stash drop stash@{$num} 
+git stash clear
+```
+
 ### 其他
 #### git报错：Please move or remove them before you can switch branches.
 ```
