@@ -164,6 +164,10 @@ git pull upstream master
 `git pull origin master --allow-unrelated-histories`   
 这操作即强制把不相干的远程 git 库与本地库合起来    
 
+### 本地关联远程分支
+`git branch --set-upstream-to=origin/remote_branch  your_branch
+`
+
 ### 其他
 #### git报错：Please move or remove them before you can switch branches.
 ```
