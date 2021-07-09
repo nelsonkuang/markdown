@@ -181,6 +181,20 @@ git stash drop stash@{$num}
 git stash clear
 ```
 
+### git rebase 分支 mr 方式开发注意点
+```
+git add . / "xxxx"
+git commit -m "fix: xxxx"
+git checkout master
+git pull origin master
+git checkout local
+git fetch
+# git rebase -i HEAD~2  # 如果有需要可以合并提交 --- 2表示合并两个。本地有多个提交时,如果不进行这一步,在 git rebase master 时会多次解决冲突(最坏情况下,每一个提交都会相应解决一个冲突)
+git rebase origin/master # ---->解决冲突--->git rebase --continue
+# git branch --set-upstream-to=origin/local  local # 如果没跟踪，则需要先跟踪
+git push -f
+```
+
 ### 其他
 #### git报错：Please move or remove them before you can switch branches.
 ```
